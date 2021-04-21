@@ -1,0 +1,17 @@
+.description {
+  border: black;
+  border-style: solid;
+  width: 50%;
+}
+
+.container {
+  padding-top: 2%;
+}
+
+.career-description {
+  padding-top: 2%;
+}
+
+.career-text {
+  padding-top: 2%;
+}

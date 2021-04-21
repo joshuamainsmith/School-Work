@@ -1,0 +1,25 @@
+.search {
+	font-size: 30px;
+	margin-top: 180px;
+	text-align: center;
+	text-size-adjust: 100px;
+}
+
+.text-center {
+	justify-content: center;
+	display: flex;
+	width: 100%;
+}
+
+.pagination {
+	justify-content: center;
+}
+
+.career-header {
+	text-align: center;
+	color: white;
+	background-color: #1cacbb;
+	height: 325px;
+	padding-top: 100px;
+	margin-bottom: -150px;
+}

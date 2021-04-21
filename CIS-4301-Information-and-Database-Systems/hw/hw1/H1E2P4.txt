@@ -1,0 +1,1 @@
+SELECT Name from Employees where Job='clerk' AND Salary < 1300;

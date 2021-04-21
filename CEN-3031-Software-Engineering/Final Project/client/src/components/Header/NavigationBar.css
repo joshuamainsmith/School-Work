@@ -1,0 +1,62 @@
+/* .header {
+	background: blue;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	padding: 1%;
+	position: absolute;
+}
+
+.nav-logo {
+	display: flex;
+	height: 50px;
+	width: 50px;
+	padding: 10%;
+}
+
+.nav-items {
+	display: flex;
+	margin-left: auto;
+	margin-right: 5%;
+	align-items: center;
+}
+
+.nav-link {
+	background-color: #d37509;
+	color: black;
+	padding: 14px 25px;
+	text-align: center;
+	text-decoration: none;
+}*/
+
+.header-sty {
+	font-size: 25px;
+	text-transform: uppercase;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.school-name {
+	color: navy;
+}
+
+.sn-1 {
+	display: block;
+}
+
+.sn-2 {
+	display: inline;
+	margin-left: 10px;
+}
+
+.logo {
+	/* display: block; */
+	max-width: 90px;
+	max-height: 70px;
+	width: auto;
+	height: auto;
+}

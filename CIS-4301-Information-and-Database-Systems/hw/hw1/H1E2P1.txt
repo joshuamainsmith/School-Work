@@ -1,0 +1,18 @@
+CREATE TABLE Employees(EID integer,
+Name varchar(50),
+Gender varchar(1),
+Job varchar(50),
+Hired_Year integer,
+Salary integer,
+City varchar(50),
+primary key(EID));
+
+INSERT INTO Employees VALUES(1001,'Reilly Martins', 'F','salesman',2016,1500,'Gainesville');
+INSERT INTO Employees VALUES(1002,'Amirah Zavala', 'M','clerk',2016,1300,'Gainesville');
+INSERT INTO Employees VALUES(1003,'Sabrina Contreras', 'F','salesman',2017,1400,'Ocalar');
+INSERT INTO Employees VALUES(1004,'Beulah Farley', 'M','clerk',2015,1000,'Gainesville');
+INSERT INTO Employees VALUES(1005,'Griff Ashton', 'M','Clerk',2013,1100,'Jacksonville');
+INSERT INTO Employees VALUES(1006,'Amara Berg', 'F','analyst',2017,2500,'Ocalar');
+INSERT INTO Employees VALUES(1007,'Mazie Herring', 'M','manager',2019,2000,'Jacksonville');
+INSERT INTO Employees VALUES(1008,'Dana Ochoa', 'F','manager',2016,2200,'Ocalar');
+

@@ -1,0 +1,55 @@
+{
+  "name": "react_template_repo",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "4.3.2",
+    "@material-ui/icons": "4.2.1",
+    "bootstrap": "^4.4.1",
+    "chartist": "0.10.1",
+    "history": "4.9.0",
+    "jquery": "^1.9.1",
+    "moment": "2.24.0",
+    "node-sass": "4.12.0",
+    "nouislider": "14.0.2",
+    "perfect-scrollbar": "1.4.0",
+    "react": "^16.13.0",
+    "react-big-calendar": "0.22.0",
+    "react-bootstrap": "^1.0.0-beta.17",
+    "react-bootstrap-sweetalert": "4.4.1",
+    "react-chartist": "0.13.3",
+    "react-datetime": "2.16.3",
+    "react-dom": "^16.13.0",
+    "react-player": "^1.15.3",
+    "react-scripts": "^3.3.0",
+    "react-swipeable-views": "0.13.3",
+    "react-table": "6.10.0",
+    "react-tagsinput": "3.19.0",
+    "reactstrap": "^8.4.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "react-router-dom": "^5.1.2"
+  },
+  "proxy": "http://localhost:5000"
+}

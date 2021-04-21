@@ -1,0 +1,1 @@
+SELECT Name FROM Employees WHERE Name LIKE '%re%' OR Name LIKE '%la%' ORDER BY Name;

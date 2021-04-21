@@ -1,0 +1,39 @@
+﻿  avl.cpp
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\avl.cpp(16,11): warning C4018:  '<=': signed/unsigned mismatch
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\avl.cpp(26,20): warning C4244:  'initializing': conversion from '_Rep' to 'double', possible loss of data
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\avl.cpp(26,20): warning C4244:         with
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\avl.cpp(26,20): warning C4244:         [
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\avl.cpp(26,20): warning C4244:             _Rep=__int64
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\avl.cpp(26,20): warning C4244:         ]
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\avl.cpp(51,64): warning C4244:  '=': conversion from '_Rep' to 'double', possible loss of data
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\avl.cpp(51,64): warning C4244:         with
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\avl.cpp(51,64): warning C4244:         [
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\avl.cpp(51,64): warning C4244:             _Rep=__int64
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\avl.cpp(51,64): warning C4244:         ]
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\avl.cpp(73,11): warning C4018:  '<=': signed/unsigned mismatch
+  bst.cpp
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\avl.cpp(83,76): warning C4244:  '=': conversion from '_Rep' to 'double', possible loss of data
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\avl.cpp(83,76): warning C4244:         with
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\avl.cpp(83,76): warning C4244:         [
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\avl.cpp(83,76): warning C4244:             _Rep=__int64
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\avl.cpp(83,76): warning C4244:         ]
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\bst.cpp(16,11): warning C4018:  '<=': signed/unsigned mismatch
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\bst.cpp(29,20): warning C4244:  'initializing': conversion from '_Rep' to 'double', possible loss of data
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\bst.cpp(29,20): warning C4244:         with
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\bst.cpp(29,20): warning C4244:         [
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\bst.cpp(29,20): warning C4244:             _Rep=__int64
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\bst.cpp(29,20): warning C4244:         ]
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\bst.cpp(52,76): warning C4244:  '=': conversion from '_Rep' to 'double', possible loss of data
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\bst.cpp(52,76): warning C4244:         with
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\bst.cpp(52,76): warning C4244:         [
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\bst.cpp(52,76): warning C4244:             _Rep=__int64
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\bst.cpp(52,76): warning C4244:         ]
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\bst.cpp(74,11): warning C4018:  '<=': signed/unsigned mismatch
+  main.cpp
+  Generating Code...
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\bst.cpp(84,76): warning C4244:  '=': conversion from '_Rep' to 'double', possible loss of data
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\bst.cpp(84,76): warning C4244:         with
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\bst.cpp(84,76): warning C4244:         [
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\bst.cpp(84,76): warning C4244:             _Rep=__int64
+D:\University\UF\COP 3530\Projects\Project 2\Project 2\Project 2\bst.cpp(84,76): warning C4244:         ]
+  Project 2.vcxproj -> D:\University\UF\COP 3530\Projects\Project 2\Project 2\Debug\Project 2.exe

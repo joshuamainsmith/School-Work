@@ -1,0 +1,12 @@
+.m-sty {
+	border-right: 1px solid limegreen;
+	border-left: 1px solid limegreen;
+}
+
+.spinner {
+	height: 6rem;
+	width: 6rem;
+	position: fixed;
+	left: calc(50% - 3rem);
+	top: calc(50% - 3rem);
+}

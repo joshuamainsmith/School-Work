@@ -1,0 +1,36 @@
+{
+  "name": "bootcamp2",
+  "version": "2.0.0",
+  "description": "Persisting data using MongoDB and Mongoose",
+  "main": "JSONtoMongo.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest --config jest.config.json"
+  },
+  "authors": [
+    {
+      "name": "Jonathan Conlin"
+    },
+    {
+      "name": "Dakota Rennemann"
+    },
+    {
+      "name": "Medhir Bhargava"
+    },
+    {
+      "name": "Christina Gardner-McCune"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "mongoose": "^5.8.10",
+    "should": "^13.2.3"
+  },
+  "devDependencies": {
+    "jest-esm-transformer": "^1.0.0",
+    "jest": "^25.1.0",
+    "@shelf/jest-mongodb": "^1.1.3"
+  },
+  "keywords": [],
+  "author": ""
+}
