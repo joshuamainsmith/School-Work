@@ -1,1 +1,0 @@
-SELECT Name from Employees where hired_year=2016
