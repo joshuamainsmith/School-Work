@@ -1,0 +1,113 @@
+.TH Project 3
+.SH Name
+Project 3 \- File Systems
+
+.SH Synopsis
+The goal of this project is to implement a userspace filesystem daemon with FUSE, providing
+read-only access with files and directories using the provided WAD data.
+
+.SH Description- 
+.PP
+
+.PP
+.B Wad.h
+.PP
+
+.B class Wad
+is where Wad class functions are declared (discussed below). Variables declared here include a 
+buffer that's filled with various file system attributes, the magic string (defined in loadWad()), 
+a vector for keeping track of descriptor elements.
+
+.B class Descriptors
+is a class that helps keep track of various desciptor attributes, such as an element's offset, length, and name.
+A vector is also here to help with keeping track of the file structure.
+
+.B Wad.cpp
+.PP
+
+.B static Wad* loadWad\-
+The file is loaded and read Wad data into the Wad class buffer with error checking.
+The number of descriptors and each offset are then recorded for the purpose of iterating
+through each descriptor and copying the information obtained into the class descriptor 
+offset, length, and name. These elements are then pushed into the descriptor vector.
+The file structure is then created by iterating through each descriptor and checking
+if a map marker is reached (either with "_END", "_START", or some variation of "E#M#") and
+populated accordingly. Otherwise, content is assumed and pushed into the descriptor vector.
+
+.B string getMagic\-
+Magic is returned (defined in loadWad()).
+
+.B bool isContent\-
+Calls isDirectory() and returns true if false.
+
+.B bool isDirectory\-
+Returns true is path is "/". Also checks getSize(path) - returns true if zero
+(zero is interpreted as false which would indicated a directory which would be true).
+
+.B int getSize\-
+Iterates through the elements to match path into a descriptor object. This is done
+simply to have access to the size of the descriptor object to be returned.
+
+.B int getContents\-
+Checked if path is content. If yes, the Wad object is copied into buffer. 
+Length is returned.
+
+.B int getDirectory-
+If path is a directory, the range of directories are parsed through and pushed onto 
+the vector. Count is returned.
+
+.B wadfs.cpp
+.PP
+
+.B static int wad_getattr\-
+If path is a directory, then dr-xr-xr-x permissions set. Otherwise, 
+-r--r--r-- permissions set.
+
+.B static int wad_open\-
+If path is content, then success is returned.
+
+.B static int wad_read\-
+If path is content, getContents() is returned.
+
+.B static int wad_opendir\-
+Success is returned.
+
+.B static int wad_readdir\-
+Iterate through the range of directories and fill buffer.
+
+.B int main-
+Error checks for argc. Also loads the wad file into the wadfs object, then assigns the argument parameters into a buffer.
+This, along with the argument count and fuse operations are used as parameters when calling fuse_main().
+
+.SH TESTING
+Used Valgrind to test for memory leaks.
+.PP
+Built and ran wad_dump.cpp against my library (changed #include Wad.h to Wad.cpp)
+.PP
+Tested FUSE and built wadfs.cpp against my library.
+
+.SH BUGS
+Not sure if a bug- had to change the "Wad.h" from wad_dump to "wad.cpp".
+.PP
+Valgrind indicated 1 block of memory is leaking from wad_dump and wadfs.
+
+.SH LINK
+https://youtu.be/3tM5Aq87P9w
+.PP
+https://joshuamainsmith.github.io/p3.mp4
+
+.SH REFERENCES/CITATIONS
+[1]https://engineering.facile.it/blog/eng/write-filesystem-fuse/
+
+[2]https://github.com/libfuse/libfuse/blob/579c3b03f57856e369fd6db2226b77aba63b59ff/include/fuse.h#L102-L577
+
+[3]https://www.cs.hmc.edu/~geoff/classes/hmc.cs135.201109/homework/fuse/fuse_doc.html
+
+[4]https://man.openbsd.org/fuse_main.3
+
+[5]https://medium.com/@jain.sm/file-system-in-user-space-example-a63a21236270
+
+[6]https://www.cs.nmsu.edu/~pfeiffer/fuse-tutorial/html/
+
+.SH AUTHOR
+Joshua Main-Smith

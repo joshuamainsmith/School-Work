@@ -1,0 +1,58 @@
+.TH Ex 1
+.SH 
+Exercise 1 \- The Command Line
+.SH SYNOPSIS
+.B Goals of this exercise:
+The goals of this exercise is to become more familiar with the Linux terminal, which will help us later in the course.
+Here, I am specifically outlining the steps I have taken to complete the first 7 steps of Terminal Navigation.
+[\fB\-n\fR \fIBITS\fR]
+[\fB\-\-bits\fR \fIBITS\fR]
+.IR file ...
+.SH DESCRIPTION
+These are the steps I have taken in creating a directory, creating a text file, moving files, and compressing directories with their
+contents. The main Linux commands used during this exercise were mkdir, mv, ls, cd, grep, tar, and gzip/gunzip
+.B Step 1
+To create a folder in the home directory (/home/reptilian) I first did [\fBcd\fR \fB/home/directory\fR]
+then created the new directory with [\fBmkdir main-smith_joshua\fR]. Doing this creates the new directory.
+
+.B Step 2
+To find files that contain the [\fIandroid_dev\fR] I used the [\fBgrep\fR] command to search in the kernel source files for the phrase, 
+with wildcards located at the beginning and end of the phrase. The command specifically is [\fBgrep -rn .*android_dev.* .\fR]. The [\fBgrep\fR]
+command was used since it's a good way to search for patterns in the file structure using regex. The \fB-rn\fR means that it searches the file
+system recursively, and outputes the line number if a match is found. The \fB.*\fR at the beginning and end of \fBandroid_dev\fR is used as a
+wildcard - the \fB.\fR is regex for any character, and the \fB*\fR is regex for any number of characters that match the previous character.
+Finally, the \fB.\fR at the end is to indicate to search in the current directory (or replace the \fB.\fR with the path to the kernel source
+directory if you haven't navigated there already).
+
+.B Step 3
+This step is pretty simple once the previous step has been completed. First, type out the same command from the previous step, but also append
+[\fB> ex1.txt\fR]. This will direct all the output to the text file \fBex1.txt\fR. The full command is [\fBgrep -rn .*android_dev.* . > ex1.txt\fR].
+
+.B Step 4
+The result from the previous step shows a few matches of a file from \fBdrivers/usb/gadget\fR. To list this directory, simply do [\fBls drivers/usb/gadget\fR]
+(in my example screenshot, I did [\fBls -la drivers/usb/gadget\fR] just to show extra details of file permissions and hidden files).
+
+.B Step 5
+I was able to move the file to the newly created directory from \fBStep 1\fR by doing [\fBmv ex1.txt /home/reptilian/main-smith_joshua\fR].
+This moved \fBex1.txt\fR out of its current directory and into \fBmain-smith_joshua\fR.
+
+.B Step 6
+To create a \fBtar\fR of the new directory (along with its content), I issued the command [\fBtar -cvf ex1.tar main-smith_joshua\fR]. This compressed
+\fBmain-smith_joshua\fR to \fBex1.tar\fR.
+
+.B Step 7
+Next, I was able to gzip the file by simply doing [\fBgzip ex1.tar\fR]. This created the output \fBex1.tar.gz\fR, which is a gzipped compression of
+a tar compression.
+
+.SH TESTING
+To test if my compression worked as intended, I created a \fBtest\fR directory, then copied \fBex1.tar.gz\fR into \fBtest\fR.
+I then unzipped the file with [\fBgunzip ex1.tar.gz\fR], which yielded \fBex1.tar\fR. Then, I did [\fBtar -zvf ex1.tar\fR], which yielded
+\fBmain-smith_joshua\fR, which contained ex1.txt as expected.
+
+.SH REFERENCES
+https://www.geeksforgeeks.org/grep-command-in-unixlinux/
+https://stackoverflow.com/questions/30012732/grep-with-wildcard-symbols
+https://www.geeksforgeeks.org/regular-expression-grep/
+
+.SH AUTHOR
+Joshua Main-Smith

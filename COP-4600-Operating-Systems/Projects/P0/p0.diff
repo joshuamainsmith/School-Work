@@ -1,0 +1,13 @@
+diff --git a/init/main.c b/init/main.c
+index 02f6b6bd6a17..134bedc524f6 100644
+--- a/init/main.c
++++ b/init/main.c
+@@ -1109,6 +1109,8 @@ static int __ref kernel_init(void *unused)
+ 	system_state = SYSTEM_RUNNING;
+ 	numa_default_policy();
+ 
++	printk("##### Joshua Main-Smith (UFID: 7160-7655) Eu quero mais coxinha #####\n");
++
+ 	rcu_end_inkernel_boot();
+ 
+ 	if (ramdisk_execute_command) {

@@ -1,0 +1,82 @@
+.TH Project 1
+.SH Name
+Project 1 \- System Calls
+.SH Synopsis
+The goal of this project is to implement three system calls in Reptilian along with a static library that invokes the system calls from the C API.
+.SH Description
+I'll discuss the files I changed in the kernel below and along with why I made such changes and its purpose.
+
+.B /usr/rep/src/reptilian-kernel/arch/x86/entry/syscalls/syscall_64.tbl
+
+I figured out to add the system call number for my new system calls from [5]. 
+I added the three system calls toward the end of the list:
+
+435	common	getProcLog		__x64_sys_getProcLog
+
+436	common	setProcLog		__x64_sys_setProcLog
+
+437	common	procLogMsg		__x64_sys_procLogMsg
+
+I followed a similar pattern in naming setProcLog and procLogMsg (syscall numbers 436 and 437 respectively).
+This table is read by scripts and is used to generate various header files that will be necessary in implementing the system calls.
+
+.B /usr/rep/src/reptilian-kernel/include/linux/sched.h
+
+I figured out to edit this file from [6] and [7]. I added a new member variable "curLevel" that is to be used in the sys.c
+source file, where I implemented my system calls. 
+I utilized the pointer to the current process with "current" to access the new member variable curLevel to either return, set, or compare against a log level.
+The variable I added was:
+
+unsigned int	curLevel;
+
+.B /usr/rep/src/reptilian-kernel/include/linux/syscalls.h
+
+I figure out to edit this file from [3] and [4]. I added three asmlinkages here under the /* kernel/sys.c */ section:
+
+asmlinkage long sys_getProcLog();
+asmlinkage long sys_setProcLog(int new_level);
+asmlinkage long sys_procLogMsg(int level, char *message);
+
+This is where the function prototypes for the system calls are located and are needed to link to the syscalls.
+
+.B /usr/rep/src/reptilian-kernel/kernel/sys.c
+
+I figured out to edit this file from [5]. I added the code at the end of the file and implemented
+the system calls getProcLog, setProcLog, and procLogMsg. Following the rules for logging outlined
+in the directions, I implemented several checks for the user's current level against what's allowed
+getProcLog checks if the level for the user is correct (between 0 and 7) and returns the level is successful.
+setProcLog does the same thing as getProcLog, while also checking if the user is a super user and updates the logging level.
+procLogMsg checks the user's level against the desired level, and logs to the appropriate kernel level (if current level >= desired level).
+
+.B Library and Harness Functions
+
+The library functions simply return the syscall result. This is used to call our system calls.
+The "retrieve" harness functions return an integer array (following the pattern outlined in the directions) and the "interpret" harness functions return the return value.
+These are used to test and verify the security of the system calls.
+
+.SH TESTING
+To test the new implementation, I obtained a diff file (as we've done in previous exercises) of the kernel.
+I then started a fresh snapshot, applied the diff to the kernel, installed it, then
+tested it against the library and harness test programs.
+
+.SH LINK
+https://youtu.be/MH20uBzQ3VI
+
+
+.SH REFERENCES/CITATIONS
+[1] https://www.cise.ufl.edu/research/reptilian/wiki/doku.php/modifying_the_linux_kernel#adding_a_system_call
+
+[2] https://williamthegrey.wordpress.com/2014/05/18/add-your-own-system-calls-to-the-linux-kernel/
+
+[3] https://blog.packagecloud.io/eng/2016/04/05/the-definitive-guide-to-linux-system-calls/
+
+[4] https://www.kernel.org/doc/html/v4.14/
+
+[5] https://brennan.io/2016/11/14/kernel-dev-ep3/
+
+[6] https://stackoverflow.com/questions/56531880/how-does-the-kernel-use-task-struct
+
+[7] https://stackoverflow.com/questions/22346545/current-in-linux-kernel-code
+
+.SH AUTHOR
+Joshua Main-Smith

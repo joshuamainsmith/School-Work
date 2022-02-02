@@ -1,0 +1,56 @@
+.TH Project 2
+.SH Name
+Project 2 \- POSIX Standards & Bindings
+
+.SH Synopsis
+The goal of this project is to convince our lizard overlords that I would be a useful human to keep around by creating a program that reads the contents of specified files - locally or remotely.
+
+.SH Description
+.B read_file Source & Header
+The header file contains the function declaration of char *read_file(const char *filename).
+The source file contains the definition of char *read_file(const char *filename). This is where all of the POSIX functionality is defined.
+The program starts off by calling open(). Upon failure, open() will return -1 at which point nullptr is returned.
+Next, the file information is obtained with fstat(), which is used to in using the file size in dynamically allocating the buffer size and to detect if the file is actually a directory.
+Then, the file is read by the size of the file and stored in buff. The file is then closed with close(), then buff is returned.
+
+.B displayfile.cpp
+This source file is used for the terminal version of the program. The return of read_file.cpp is stored into buff, then compared against nullptr. If buff is nullptr, 
+an error message is printed to the screen then 1 is returned. Otherwise, the contents of buff are printed to the screen - the buffer is then freed with free().
+
+.B native-calls.cpp
+This source file is used for the GUI version of the program. This file simply returns a Java style string converted into a C style string (with env->GetStringUTFChars()), which is then
+in turn converted from a C style string into a Java style string (with env->NewStringUTF()).
+
+.B P2Activity.java
+This is where the GUI interface is created. Elements I added are submitbutton, displaybox, and filenamebox. The submit button is created first and is set to execute myListener
+in the event that the button is clicked. When clicked, displaybox and filenamebox are created. Then, filenamebox is used to get the string of text input in the box and send it to native-calls.cpp.
+The return value is then stored in buff. The contents of buff are then compared - if null, set the text of the display box to an error message. Otherwise, set it to the contents of buff.
+The OnClickListener (myListener) is where the native C++ call is made. 
+
+.B CMakeLists.txt
+Both read_file.h and read_file.cpp were added to the add_library() call to ensure that these files would be compiled and available to native-lib.
+
+.SH TESTING
+Testing was done on the by compiling displayfile.cpp, read_file.cpp and read_file.h using the commands specified in the document. I then executed displayfile along with the 
+name of a file that was present as an argument. I also tested the case where a nonexistent file was used as an argument.
+For the GUI, I connected Adroid Studio remotely to Reptilian and ran the application. I again tested the application with an existent and nonexistent file.
+Finally, I tested for memory leaks using valgrind.
+
+.SH LINK
+https://youtu.be/jPH5ACZpeC8
+
+.SH REFERENCES/CITATIONS
+[1]https://pubs.opengroup.org/onlinepubs/7990989775/
+
+[2]https://developer.android.com/reference/android/widget/Button
+
+[3]https://developer.android.com/training/keyboard-input/style
+
+[4]https://stackoverflow.com/questions/29479647/android-setonclicklistener-vs-onclicklistener-vs-view-onclicklistener
+
+[5]https://stackoverflow.com/questions/13322299/file-read-using-posix-apis
+
+[6]https://techoverflow.net/2013/08/21/how-to-get-filesize-using-stat-in-cc/
+
+.SH AUTHOR
+Joshua Main-Smith

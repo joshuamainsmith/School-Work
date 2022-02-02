@@ -1,0 +1,77 @@
+Name
+	P0: My First Kernel Mod
+
+Synopsis
+	The goal of the project is to become familiar with the kernel and how to modify it (along with modifying
+	the GRUB menu for extra credit).
+
+Description
+	Kernel Mod Description
+		I was able to modify the boot message by modifying the main.c source file in the
+		init directory, by searching for rcu_end_inkernel_boot().
+
+	/usr/rep/src/reptilian-kernel/init/main.c
+		How I Found It
+			I found this file by searching for rcu_end_inkernel_boot() in the kernel source, 
+			a function mentioned in the document. This was found using the grep command (discussed below).
+			I used Nano to open main.c, then Ctrl+W to search for the function (found around line 1112 
+			before modification).
+
+		What I Did
+			I added a printk() statement just before rcu_end_inkernel_boot(). The printk() function is 
+			needed instead of printf() because printk() is a kernel level function wheras printf() is a 
+			standard C library function.
+
+		Why I Made Those Changes
+			Since printk() method is useful for printing messages to the kernel log, wheras printf() prints
+			to standard output. This means that if we want to print messages to the boot menu, we need to
+			use printk() instead (which is different than printing strings to a terminal window with printf())
+
+	GRUB Mod Description
+		I modified the GRUB menu by searching the string "Reptilian" from the topmost directory (/).
+	
+	/mnt/sysroot/grub/menu.lst
+		How I Found It
+			I found this by using grep to search for a string "Reptilian" from the top parent directory. 
+			Reptilian was a common string among all the options, so this seemed to be the most appropriate 
+			search.
+
+		What I Did
+			I added my name to the end of the title for the default boot option.
+
+		Why I Made Those Changes
+			Adding my name there simply changes the title of the boot menu option - not how the 
+			kernel itself boots.
+
+	
+		Linux Commands Used
+			grep -rn String
+				How did I find out about this command?
+					This is a common command that I've used in previous classes,
+					but I knew to use -rn from reading the man page ("man grep").
+					-r is recursive, meaning the files are searched for whatever string you're looking for
+					-n is for the line number, to make it easier to find the line the string is on.
+
+				What does this command do and Why did you decide to use it?
+					It searches for patterns in files and directories using regex. The only other Linux
+					command that I'm familiar with that does this is "find", which can be used to find files
+					and their metadata. So, grep seemed like a more appropriate option for what I needed (i.e.
+					searching for strings inside files).
+					
+
+TESTING
+
+	I created a patch file (git diff remotes/origin/os-latest > p0.diff) then saved it using SFTP. Then, on a clean snapshot
+	I uploaded the patch file, applied it (git apply p0.diff), installed it (make && sudo make install && sudo make modules_install) 
+	then rebooted Reptilian to see if the patch was successful.
+
+LINK
+	Screencast: https://youtu.be/RkQrLDMSJpU
+
+
+REFERENCES/CITATIONS
+		https://www.geeksforgeeks.org/difference-between-printk-and-printf-in-linux/
+		https://www.geeksforgeeks.org/grep-command-in-unixlinux/
+
+AUTHOR
+        Joshua Main-Smith

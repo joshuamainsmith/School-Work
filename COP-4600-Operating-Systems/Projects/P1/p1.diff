@@ -1,0 +1,112 @@
+diff --git a/arch/x86/entry/syscalls/syscall_64.tbl b/arch/x86/entry/syscalls/syscall_64.tbl
+index bbfc6d440870..e5ac782c2354 100644
+--- a/arch/x86/entry/syscalls/syscall_64.tbl
++++ b/arch/x86/entry/syscalls/syscall_64.tbl
+@@ -345,6 +345,9 @@
+ 334	common	rseq			__x64_sys_rseq
+ 424	common	pidfd_send_signal	__x64_sys_pidfd_send_signal
+ 434	common	pidfd_open		__x64_sys_pidfd_open
++435	common	getProcLog		__x64_sys_getProcLog
++436	common	setProcLog		__x64_sys_setProcLog
++437	common	procLogMsg		__x64_sys_procLogMsg
+ 
+ #
+ # x32-specific system call numbers start at 512 to avoid cache impact
+diff --git a/include/linux/sched.h b/include/linux/sched.h
+index fed5e0d411eb..7c6e9fbb0543 100644
+--- a/include/linux/sched.h
++++ b/include/linux/sched.h
+@@ -654,6 +654,7 @@ struct task_struct {
+ 	/* Per task flags (PF_*), defined further below: */
+ 	unsigned int			flags;
+ 	unsigned int			ptrace;
++	unsigned int			curLevel;
+ 
+ #ifdef CONFIG_SMP
+ 	struct llist_node		wake_entry;
+diff --git a/include/linux/syscalls.h b/include/linux/syscalls.h
+index 8e5b2c6d5dea..799143eb0aaa 100644
+--- a/include/linux/syscalls.h
++++ b/include/linux/syscalls.h
+@@ -672,6 +672,9 @@ asmlinkage long sys_umask(int mask);
+ asmlinkage long sys_prctl(int option, unsigned long arg2, unsigned long arg3,
+ 			unsigned long arg4, unsigned long arg5);
+ asmlinkage long sys_getcpu(unsigned __user *cpu, unsigned __user *node, struct getcpu_cache __user *cache);
++asmlinkage long sys_getProcLog();
++asmlinkage long sys_setProcLog(int new_level);
++asmlinkage long sys_procLogMsg(int level, char *message);
+ 
+ /* kernel/time.c */
+ asmlinkage long sys_gettimeofday(struct timeval __user *tv,
+diff --git a/kernel/sys.c b/kernel/sys.c
+index 0a1cdee858de..d74c026ab04f 100644
+--- a/kernel/sys.c
++++ b/kernel/sys.c
+@@ -2807,3 +2807,67 @@ COMPAT_SYSCALL_DEFINE1(sysinfo, struct compat_sysinfo __user *, info)
+ 	return 0;
+ }
+ #endif /* CONFIG_COMPAT */
++
++SYSCALL_DEFINE0(getProcLog)
++{
++	if (current->curLevel >= 0 && current->curLevel <= 7)
++	{
++		return current->curLevel;
++	}
++	return -1;
++}
++
++SYSCALL_DEFINE1(setProcLog, int, new_level)
++{
++	if (get_current_cred()->uid.val == 0 && new_level >= 0 && new_level <= 7)
++	{
++		current->curLevel = new_level;
++		return new_level;
++	}
++	return -1;
++}
++
++SYSCALL_DEFINE2(procLogMsg, char*, message, int, level)
++{
++	if (level <= current->curLevel)
++	{
++		if (level == 0)
++		{
++			printk(KERN_EMERG "PROC_OVERRIDE [%s, %d]: %s", current->comm, current->pid, message);
++		}
++		else if (level == 1)
++		{
++			printk(KERN_ALERT "PROC_ALERT [%s, %d]: %s", current->comm, current->pid, message);
++		}
++		else if (level == 2)
++		{
++			printk(KERN_CRIT "PROC_CRITICAL [%s, %d]: %s", current->comm, current->pid, message);
++		}
++		else if (level == 3)
++		{
++			printk(KERN_ERR "PROC_ERROR [%s, %d]: %s", current->comm, current->pid, message);
++		}
++		else if (level == 4)
++		{
++			printk(KERN_WARNING "PROC_WARNING [%s, %d]: %s", current->comm, current->pid, message);
++		}
++		else if (level == 5)
++		{
++			printk(KERN_NOTICE "PROC_NOTICE [%s, %d]: %s", current->comm, current->pid, message);
++		}
++		else if (level == 6)
++		{
++			printk(KERN_INFO "PROC_INFO [%s, %d]: %s", current->comm, current->pid, message);
++		}
++		else if (level == 7)
++		{
++			printk(KERN_DEBUG "PROC_DEBUG [%s, %d]: %s", current->comm, current->pid, message);
++		}
++		else
++		{
++			return -1;
++		}
++		return level;
++	}
++	return -1;
++}
